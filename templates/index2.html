@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>STOCK PREDICT</title>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+</head>
+<body>
+<h1>STOCK PREDICT PRICE</h1>
+<h2>Select the dataset</h2>
+<form action="/" method="post">
+    <select name="data1" id="country1">
+        <option value="BTC-USD.csv">bitcoin</option>
+        <option value="FB.csv">FB</option>
+        <option value="https://raw.githubusercontent.com/mwitiderrick/stockprice/master/NSE-TATAGLOBAL.csv">Tata</option>
+    </select>
+    <input type="submit" value="OK">
+</form>
+<div>
+    <h2>PREDICTION</h2>
+    <canvas id="myChart" ></canvas>
+<!--    <img src={{url}} alt="Chart" height="auto" width="100%">-->
+</div>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{app|safe}},
+        datasets: [
+        {
+            label: 'real_stock_price',
+            data: {{real_stock_price|safe}},
+            borderColor: 'rgb(255, 99, 132)',
+            borderWidth: 1,
+            fill: false
+        },
+        {
+            label: 'predicted_stock_price',
+            data: {{predicted_stock_price|safe}},
+            borderColor: 'rgb( 99, 255, 132)',
+            borderWidth: 1,
+            fill: false
+        }
+        ]
+    },
+    options: {
+        }
+});
+</script>
+</body>
+</html>
